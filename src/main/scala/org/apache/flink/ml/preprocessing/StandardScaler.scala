@@ -159,7 +159,7 @@ object StandardScaler {
   private def extractFeatureMetrics[T <: Vector](dataSet: DataSet[T])
   : DataSet[(linalg.Vector[Double], linalg.Vector[Double])] = {
     val metrics = dataSet.map{
-      v => (1.0, v.asBreeze, linalg.Vector.zeros[Double](v.size))
+      v:T => (1.0, v.asBreeze, linalg.Vector.zeros[Double](v.size))
     }.reduce{
       (metrics1, metrics2) => {
         /* We use formula 1.5b of the cited technical report for the combination of partial

@@ -362,7 +362,7 @@ object FlinkMLTools {
   }
 
   /** Groups the DataSet input into numBlocks blocks.
-    * 
+    *
     * @param input
     * @param numBlocks Number of Blocks
     * @param partitionerOption Optional partitioner to control the partitioning
@@ -374,31 +374,17 @@ object FlinkMLTools {
     numBlocks: Int,
     partitionerOption: Option[Partitioner[Int]] = None)
   : DataSet[Block[T]] = {
+    val blockIDInput = input map {
+      element: T =>
+        val blockID = element.hashCode() % numBlocks
 
-    val blockIDInput = input.map(ele=>{
-      val blockID = ele.hashCode() % numBlocks
-
-      val blockIDResult = if(blockID < 0){
-        blockID + numBlocks
-      } else {
-        blockID
-      }
-
-      (blockIDResult, ele)
-    })
-
-//    val blockIDInput = input map {
-//      element =>
-//        val blockID = element.hashCode() % numBlocks
-//
-//        val blockIDResult = if(blockID < 0){
-//          blockID + numBlocks
-//        } else {
-//          blockID
-//        }
-//
-//        (blockIDResult, element)
-//    }
+        val blockIDResult = if(blockID < 0){
+          blockID + numBlocks
+        } else {
+          blockID
+        }
+        (blockIDResult, element)
+    }
 
     val preGroupBlockIDInput = partitionerOption match {
       case Some(partitioner) =>

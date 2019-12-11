@@ -391,11 +391,11 @@ object DecisionTree {
         val maxBins = tree.config.maxBins
         val (block, _) = blockedElements
         val numPoints = block.values.length
-        for (i <- 0 to numPoints - 1) {
+        for (i <- 0 until numPoints) {
           val LabeledVector(label, vector) = block.values.apply(i)
           val node = tree.filter(vector)
           if (node.predict.isEmpty) {
-            for (j <- 0 to dimension - 1) {
+            for (j <- 0 until dimension) {
               histograms.get((node.id, j, label)) match {
                 // if this histogram already exists, add a new entry to it
                 case Some(hist) => hist.add(vector.apply(j))
@@ -438,7 +438,7 @@ object DecisionTree {
     val stats = DataStats.dataStats(input.map(labeledVector => {
       val vector = labeledVector.vector
       val newVector = Array.ofDim[Double](vector.size + 1)
-      for (i <- 0 to vector.size - 1) {
+      for (i <- 0 until vector.size) {
         newVector(i) = vector.apply(i)
       }
       newVector(vector.size) = labeledVector.label
