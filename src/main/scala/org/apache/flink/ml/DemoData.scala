@@ -1,11 +1,13 @@
 package org.apache.flink.ml
 import org.apache.flink.ml.common.LabeledVector
 import org.apache.flink.ml.math.DenseVector
+import org.apache.flink.ml.math.Vector
 
 object DemoData {
   /** Centered data of fisheriris data set
    *
    */
+
   val trainingData = Seq[LabeledVector](
     LabeledVector(1.0000, DenseVector(-0.2060, -0.2760)),
     LabeledVector(1.0000, DenseVector(-0.4060, -0.1760)),
@@ -394,4 +396,13 @@ object DemoData {
     LabeledVector(1,DenseVector(37,0,0,1,1,0)),
     LabeledVector(0,DenseVector(37,0,1,0,0,0))
   )
+
+  val pp_data = Seq[Vector](
+    DenseVector(40.4,1,1,1,1,1),
+    DenseVector(40.4,0,0,0,0,0),
+    DenseVector(40.4,1,1,0,1,0),
+    DenseVector(40.5,1,1,1,1,0)
+  )
+
+
 }

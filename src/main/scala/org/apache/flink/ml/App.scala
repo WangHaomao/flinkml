@@ -2,7 +2,9 @@ package org.apache.flink.ml
 
 import org.apache.flink.api.scala._
 import org.apache.flink.ml.classification.DecisionTree
+import org.apache.flink.ml.math.Vector
 import org.apache.flink.ml.DemoData
+import org.apache.flink.ml.common.LabeledVector
 
 
 object App {
@@ -15,8 +17,17 @@ object App {
 //    print(learner)
 
     val trainingDS = env.fromCollection(DemoData.DiagnosisTrainData).setParallelism(4)
-    val testDS = env.fromCollection(DemoData.DiagnosisTestData).setParallelism(4)
+    val testingDS = env.fromCollection(DemoData.DiagnosisTestData).setParallelism(4)
+
     learner.fit(trainingDS)
-    println("Accuracy:" + learner.testAccuracy(testDS,learner.treeOption.get))
+//    val tmp = res.map{
+//      e=>(e._2,1)
+//    }.reduce(
+//      (a, b) => (a._1 + b._1, a._2 + b._2)
+//    ).collect().toArray
+//    print(tmp)
+
+
+    println("Accuracy:" + learner.testAccuracy(testingDS,learner.treeOption.get))
   }
 }
