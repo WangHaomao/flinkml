@@ -1,22 +1,4 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package org.apache.flink.ml.classification
+package org.apache.flink.ml.classifier
 
 import org.apache.flink.api.scala._
 import org.apache.flink.ml._
@@ -52,6 +34,7 @@ import scala.collection.mutable
  *
  * Details of the algorithm can be found
  * {{{@link http://www.jmlr.org/papers/volume11/ben-haim10a/ben-haim10a.pdf}}}
+ *
  * @example
  * {{{
  *             val trainingDS: DataSet[LabeledVector] = ...
@@ -72,34 +55,34 @@ import scala.collection.mutable
  *
  * =Parameters=
  *
- * - [[org.apache.flink.ml.classification.DecisionTree.Depth]]:
+ * - [[org.apache.flink.ml.classifier.DecisionTree.Depth]]:
  * Sets the maximum allowed depth of the tree.
  * (Default value: '''30''')
  *
- * - [[org.apache.flink.ml.classification.DecisionTree.Category]]:
+ * - [[org.apache.flink.ml.classifier.DecisionTree.Category]]:
  * Sets which attributes are to be considered as categorical fields. For example, if the 0th ,2nd
  * and 5th attributes are categorical, this input would be [0,2,5]
  * (Default value: '''Array()''')
  *
- * - [[org.apache.flink.ml.classification.DecisionTree.Classes]]:
+ * - [[org.apache.flink.ml.classifier.DecisionTree.Classes]]:
  * Sets the number of classes in the data
  * (Default value: '''2''')
  *
- * - [[org.apache.flink.ml.classification.DecisionTree.MaxBins]]:
+ * - [[org.apache.flink.ml.classifier.DecisionTree.MaxBins]]:
  * Sets the maximum number of splits allowed for every attribute. This number should be neither
  * too high nor too low. Increasing this would lead to an increase in accuracy, but would
  * require more time for training.
  * (Default value: '''100''')
  *
- * - [[org.apache.flink.ml.classification.DecisionTree.MinInstancesPerNode]]:
+ * - [[org.apache.flink.ml.classifier.DecisionTree.MinInstancesPerNode]]:
  * Sets the minimum number of instances that must be present at a node
  * (Default value: '''1''')
  *
- * - [[org.apache.flink.ml.classification.DecisionTree.Pruning]]:
+ * - [[org.apache.flink.ml.classifier.DecisionTree.Pruning]]:
  * Sets whether to prune the tree after training or not. As of now, this option is obsolete.
  * (Default value: '''false''')
  *
- * - [[org.apache.flink.ml.classification.DecisionTree.SplitStrategy]]:
+ * - [[org.apache.flink.ml.classifier.DecisionTree.SplitStrategy]]:
  * Sets the split algorithm which should be used. The two most popular methods of "Gini" gain and
  * "Entropy" are supported.
  * (Default value: '''Gini''')
