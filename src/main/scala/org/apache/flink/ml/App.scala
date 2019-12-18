@@ -5,7 +5,7 @@ import org.apache.flink.ml.classifier.DecisionTree
 import org.apache.flink.ml.math.Vector
 import org.apache.flink.ml.DemoData
 import org.apache.flink.ml.common.LabeledVector
-
+import org.apache.flink.streaming.api.scala.DataStream
 
 object App {
   def main(args: Array[String]): Unit = {

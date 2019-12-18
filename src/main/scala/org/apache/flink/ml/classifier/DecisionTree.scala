@@ -11,7 +11,6 @@ import org.apache.flink.ml.statistics.FieldType._
 import org.apache.flink.ml.tree._
 
 import scala.collection.mutable
-
 /**
  * Decision Tree Classifier for classification problems.
  *
@@ -34,25 +33,6 @@ import scala.collection.mutable
  *
  * Details of the algorithm can be found
  * {{{@link http://www.jmlr.org/papers/volume11/ben-haim10a/ben-haim10a.pdf}}}
- *
- * @example
- * {{{
- *             val trainingDS: DataSet[LabeledVector] = ...
- *             val tree = DecisionTree()
- *             .setDepth(20).setMinInstancePerNode(2)
- *             .setSplitStrategy("Gini")
- *             .setMaxBins(100)
- *             .setDimension(4)
- *             .setCategory(Array(0,2))
- *             .setClasses(2)
- *
- *             tree.fit(trainingDS)
- *
- *             val testingDS: DataSet[Vector] = ...
- *             val predictions: DataSet[LabeledVector] = tree.predict(testingDS)
- *
- * }}}
- *
  * =Parameters=
  *
  * - [[org.apache.flink.ml.classifier.DecisionTree.Depth]]:
