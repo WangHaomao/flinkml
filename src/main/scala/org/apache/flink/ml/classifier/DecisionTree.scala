@@ -14,44 +14,8 @@ import scala.collection.mutable
 
 /**
  * Decision Tree Classifier for classification problems.
- *
- * A decision tree is a binary tree structure where every [[tree.Node]] holds a [[SplitValue]] which
- * determines whether a particular instance goes to the left tree or the right tree.
- * A leaf node of the tree holds the predicted label for any instance which reaches there.
- *
- * Training phase:
- * During training, we start with a root node, which is in untrained state. The tree goes
- * through a series of growth steps where each untrained node is trained using the instances
- * which reach to this node.
- * Based on all training instances which reach a particular node, a histogram is calculated to
- * evaluate the distribution of values across every attribute of the examples, which is used to
- * find the best possible split of the node.
- *
- * Testing phase:
- * During testing, every instance is sent down to a leaf node following a series of left-right
- * steps determined by the [[SplitValue]] held by the nodes of the tree. Upon reaching a leaf
- * node, we have a prediction for this instance.
- *
  * Details of the algorithm can be found
- * {{{@link http://www.jmlr.org/papers/volume11/ben-haim10a/ben-haim10a.pdf}}}
- *
- * @example
- * {{{
- *             val trainingDS: DataSet[LabeledVector] = ...
- *             val tree = DecisionTree()
- *             .setDepth(20).setMinInstancePerNode(2)
- *             .setSplitStrategy("Gini")
- *             .setMaxBins(100)
- *             .setDimension(4)
- *             .setCategory(Array(0,2))
- *             .setClasses(2)
- *
- *             tree.fit(trainingDS)
- *
- *             val testingDS: DataSet[Vector] = ...
- *             val predictions: DataSet[LabeledVector] = tree.predict(testingDS)
- *
- * }}}
+ * @link http://www.jmlr.org/papers/volume11/ben-haim10a/ben-haim10a.pdf
  *
  * =Parameters=
  *
@@ -417,6 +381,7 @@ object DecisionTree {
     // treat the label as another class in itself.
     val categoryBuffer = category.toBuffer
     categoryBuffer += dimension
+
     val newCategory = categoryBuffer.toArray
     val stats = DataStats.dataStats(input.map(labeledVector => {
       val vector = labeledVector.vector
@@ -427,8 +392,8 @@ object DecisionTree {
       newVector(vector.size) = labeledVector.label
       DenseVector(newVector)
     }), newCategory).collect().head
-
-    require(stats.dimension == dimension + 1, "Invalid data.")
+    val stDimension = stats.dimension
+    require(stats.dimension == dimension + 1, f"Invalid data.get $stDimension and $dimension")
     config.setDataStats(
       new DataStats(stats.total, stats.dimension - 1, stats.fields.slice(0, dimension))
     )

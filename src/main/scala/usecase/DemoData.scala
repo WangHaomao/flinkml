@@ -1,7 +1,7 @@
-package org.apache.flink.ml
+package usecase
+
 import org.apache.flink.ml.common.LabeledVector
-import org.apache.flink.ml.math.DenseVector
-import org.apache.flink.ml.math.Vector
+import org.apache.flink.ml.math.{DenseVector, Vector}
 
 object DemoData {
   /** Centered data of fisheriris data set

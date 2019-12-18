@@ -41,7 +41,7 @@ class ContinuousHistogram(capacity: Int, min: Double, max: Double) extends Onlin
   private val upper = max
 
   require(capacity > 0, "Capacity should be a positive integer")
-  require(lower < upper, "Lower must be less than upper")
+  require(lower < upper, f"Lower must be less than upper, get $lower, $upper")
 
   val data = new mutable.ArrayBuffer[(Double, Int)]()
 
