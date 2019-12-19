@@ -10,7 +10,7 @@ object App {
     val learner = DecisionTree().
       setMaxBins(3).
       setDepth(4).
-      setDimension(6).
+      setDimension(4).
       setClasses(2)
       .setSplitStrategy("Gini")
 //      .setCategory(Array(6))
@@ -19,13 +19,11 @@ object App {
     val testD = DataHelper.loadValidData()
     val trainingDS = env.fromCollection(trainD).setParallelism(4)
     val testingDS = env.fromCollection(testD).setParallelism(4)
+
+    val t1 = System.nanoTime
     learner.fit(trainingDS)
-//    val res = learner.predict(testDS)
-//    val tmp = res.map{
-//      e=>(e._2)
-//    }.collect().toArray
-//    print(tmp.mkString(","))
-//      res.print()
     println("Accuracy:" + learner.testAccuracy(testingDS,learner.treeOption.get))
+    val duration = (System.nanoTime - t1) / 1e9d
+    println(duration)
   }
 }

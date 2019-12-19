@@ -5,13 +5,15 @@ import org.apache.flink.ml.math.{DenseVector, Vector}
 
 
 object DataHelper {
+  val curDir = System.getProperty("user.dir") + "/src/main/scala/usecase"
   def loadTrainData(): Seq[LabeledVector] = {
-    val trainPath = "data/adult_train.csv"
+    println(curDir)
+    val trainPath = f"$curDir/data/covtype_train.csv"
     val trainData = loadCsvData(trainPath,labelInx = 0)
     trainData
   }
   def loadValidData(): Seq[LabeledVector] = {
-    val testPath = "data/adult_test.csv"
+    val testPath = f"$curDir/data/covtype_test.csv"
     val testData = loadCsvData(testPath,labelInx = 0)
     testData
   }
